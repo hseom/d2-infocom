@@ -57,12 +57,6 @@ query flooding, distributed systems
 \end{IEEEkeywords}
 \IEEEpeerreviewmaketitle
 \section{Introduction}\label{sec:introduction} 
-{\bf Motivation} The main motivation of this work is two folds: 
-1) how to build optimal unstructured search system in terms of 
-trade-off in caching and querying cost. 
-2) how to build unstructured search system using existing structured
-P2P topologies, such as Chord, to work alongside a DHT and 
-to minimize developing and deploying P2P software. 
 Since the success of applications like 
 Napster and Gnutella,
 Peer-to-Peer (P2P) file sharing systems have become some of the most
@@ -77,6 +71,19 @@ and still continues to grow\cite{Goth06b}.
 Each node in a P2P system operates simultaneously as both a server and a client
 in a distributed fashion. Nodes navigate the
 underlying network without knowledge of their global structure. 
+Currently, there are two common types of P2P search systems: flooding-based
+unstructured systems and DHT-based key-lookup systems. 
+DHT-based query systems ($O(\log N)$) outperform flooding-based systems in terms of 
+search cost ($O(N)$), but they cannot support general searches.
+On the other hand, flooding-based unstructured search technique can resolve 
+any kind of queries at the expenxe of search cost.
+The main motivation of this work is two folds: 
+1) how to build optimal unstructured search system in terms of 
+trade-off in caching and querying cost. 
+2) how to build unstructured search system using existing structured
+P2P topologies, such as Chord, to work alongside a DHT and 
+to minimize developing and deploying P2P software. 
+
 \iffalse
 P2P systems may be categorized into three
 different architectures: \emph{centralized},
