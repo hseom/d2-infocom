@@ -166,6 +166,9 @@ A query generates $O(\sqrt{N})$ messages.
 This implies more messages when compared to DHTs, which have only O($\log N$) complexity,
 but offers a major improvement over flooding-based searches with
 $O(N)$.
+
+%---------------------------------------------------
+\iffalse
 Assume that data can be cached on $C$ of any $N$ nodes.
 Since there is no structure assumed, and if load is evenly
 balanced across the nodes,
@@ -191,6 +194,8 @@ Such overhead costs would be completely acceptable for many applications,
  especially when we handle meta data instead of large multimedia files.
 Deetoo is the first system that arbitrary unstructured queries can be mapped 
 to a structured P2P system with query cost $O(\sqrt{N})$.
+%--------------------------------------
+\fi
 Our searching algorithm can coexist on the same P2P network
 with a DHT, so with Deetoo
 users can still have structured as well as unstructured queries.
@@ -210,6 +215,8 @@ walk based schemes previously proposed in the literature.
 %data control - deletion ability, stabilization optimal replication 
 %beyond DHT - general queries
 %beyond Gnutella - contrl data ( deletion, stabilization) control success rate by adjusting replication factor
+%----------------------------------------------
+\iffalse
 The main motive of this work is three folds: 1) how to build optimal unstructured 
 search systems; 2) how to build efficient generalized metric-space search systems;
 3) how to build data-controllable unstructured systems which can delete replicated
@@ -231,8 +238,6 @@ number of replicas cannot easily managed by such systems.
 % given by replication factor which is defined when an object is 
 %inserted.
 
-
-
 On the other hand, key lookup is highly structured and, as such, can be made to use 
 logarithmic-in-network-size costs to do key lookup; however, 
 many search problems cannot be mapped to the problem of key lookup.
@@ -251,6 +256,8 @@ Regular expressions cannot, in any obvious way, be mapped to metric space.
 Many common queries have no easily exploited structure. 
 This work investigate an approach to use existing structure P2P systems to achieve optimal query
 costs for generic queries.
+%-------------------------
+\fi
 
 Deetoo provides more efficient than generic unstructured systems.  
 Some of flooding-based unstructured systems with similar replication strategy or with super peers 
@@ -436,8 +443,6 @@ bin that may or may not be occupied by a node.  Instead of
 querying and inserting along one row and one column, we will do so over a
 sufficient number of rows and columns such that the probability of having 
 more than one node in the overlapping set is very likely to be one.
-
-
 \begin{center}
 \begin{figure*}[ht]
 \centering
