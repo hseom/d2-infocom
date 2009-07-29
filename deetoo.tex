@@ -28,26 +28,42 @@ Email: boykin@acis.ufl.edu}
 
 \begin{abstract}
 
-We present Deetoo, an algorithm to perform completely general queries on
-a P2P network.  Our interest is in building efficient unstructured
-query system on top of existing structured P2P topologies.
-Deetoo provides a reusable search tool to work alongside a DHT, thus, 
-it contributes to minimize developing and deplying new P2P software.
-On the other hand, From the fact that Deetoo deals with unstructured search, 
-we can apply our network for any type of query
-without the necessity of mapping our queries onto a fixed DHT structure.
-Deetoo is optimal in terms of trade-off in querying and caching cost.
-$O(\sqrt{N}$ cost for both caching and querying is required to achieve 
-a constant search success probability. 
-Deetoo leverages $1-D$ routable small-world networks, and multicasting trees
-built on those networks, to build an unstructured query system
-which can support general queries,
-such as high-dimensional proximity queries or regular expression matching.
-We present simulation and analysis of the publishing and querying costs.
-Publishing and querying cost $O(\sqrt{N})$ bandwidth and
-run in a time of $O(\log^2 N)$ on a network of $N$ nodes.
-
+We present Deetoo, an algorithm to perform completely general queries,
+for instance high-dimensional proximity queries or regular expression
+matching, on a P2P network.  
+Deetoo is an efficient unstructured query system on top of existing 
+structured P2P ring topologies.
+Deetoo provides a reusable search tool to work alongside a DHT, thus,
+it provides new capabilities while reusing existing P2P models and software.
+Since our algorithm is for unstructured search, there is
+no structural relationship between the queries and the network topology
+and hence no need to provide a mapping of queries onto a fixed DHT structure.
+Deetoo is optimal in terms of the trade-off in querying and caching cost.
+For networks of size $N$,
+$O(\sqrt{N})$ cost for both caching and querying is required to achieve
+a constant (in $N$) search success probability.  Queries execute a time
+of $O(\log^2 N)$.
 \end{abstract}
+
+%Our interest is in building efficient unstructured
+%query system on top of existing structured P2P topologies.
+%Deetoo provides a reusable search tool to work alongside a DHT, thus, 
+%it contributes to minimize developing and deploying new P2P software.
+%On the other hand, From the fact that Deetoo deals with unstructured search, 
+%we can apply our network for any type of query
+%without the necessity of mapping our queries onto a fixed DHT structure.
+%Deetoo is optimal in terms of trade-off in querying and caching cost.
+%$O(\sqrt{N}$ cost for both caching and querying is required to achieve 
+%a constant search success probability. 
+%Deetoo leverages $1-D$ routable small-world networks, and multicasting trees
+%built on those networks, to build an unstructured query system
+%which can support general queries,
+%such as high-dimensional proximity queries or regular expression matching.
+%We present simulation and analysis of the publishing and querying costs.
+%Publishing and querying cost $O(\sqrt{N})$ bandwidth and
+%run in a time of $O(\log^2 N)$ on a network of $N$ nodes.
+%
+%\end{abstract}
 
 \begin{IEEEkeywords}
 Peer-to-peer systems, overlay network, file searching,
@@ -670,31 +686,30 @@ We define this replicating process as \emph{stabilization} in this paper.
 
 When a new node joins a network, the following steps are taken: 
 \begin{enumerate}
-\item select two different random 
-addresses, 
-\item calculate minimum ring distances to neighboring nodes which have left closest address
-	and right closest address,
-\item find a proper place on the
-virtual ring space by selecting address whose minimum distance to neighbor node 
-is bigger than the other,
-\item obtain an address and makes a connection to two adjacent
-neighbors and one short-cut neighbor based on Kleinberg's
-\emph{inverse $r^{th}$-power distribution}, 
-\item as a final step, copy objects
-from neighbors in the same set of sub-rings (in the same columns in
-matrix space). 
+%\item select two different random addresses, 
+%\item calculate minimum ring distances to neighboring nodes which have 
+%      left closest address and right closest address,
+%\item find a proper place on the virtual ring space by selecting address 
+%      whose minimum distance to neighbor node is bigger than the other,
+\item pick a random address
+%\item obtain an address and 
+\item makes a connection to two adjacent
+      neighbors and one short-cut neighbor based on Kleinberg's
+      \emph{inverse $r^{th}$-power distribution}, 
+\item as a final step, copy objects from neighbors in the same 
+      set of sub-rings (in the same columns in matrix space). 
 \end{enumerate}
-\begin{figure}
-\centering
-\includegraphics[width=3 in]{evenNet}
-\caption{Choosing a position on the ring when a node joins Deetoo.} \label{fig:join}
-\end{figure}
-Figure \ref{fig:join} shows how a new node finds its right place.
-From randomly selected positions \emph{A} and \emph{B}, the nearest neighbors are 
-\emph{node1} and \emph{node3}. Between these two nodes, 
-\emph{node3} has a bigger distance to \emph{A} than the distance 
-from \emph{node1} to \emph {B}. Thus, a new node takes a position \emph{A} as 
-its new address. 
+%\begin{figure}
+%\centering
+%\includegraphics[width=3 in]{evenNet}
+%\caption{Choosing a position on the ring when a node joins Deetoo.} \label{fig:join}
+%\end{figure}
+%Figure \ref{fig:join} shows how a new node finds its right place.
+%From randomly selected positions \emph{A} and \emph{B}, the nearest neighbors are 
+%\emph{node1} and \emph{node3}. Between these two nodes, 
+%\emph{node3} has a bigger distance to \emph{A} than the distance 
+%from \emph{node1} to \emph {B}. Thus, a new node takes a position \emph{A} as 
+%its new address. 
 
 Each object must keep its range information as well as the object itself or meta data 
 for the object where 
@@ -713,8 +728,8 @@ copied to the new successfully joined node from neighbors.
 newly joined node only if the new node's address lies on the recalculated range.
 \item Repeat 1 through 3 for all objects from both adjacent neighbors.
 \end{enumerate}
-If we assume that there exist \emph{m} unique objects in the network whose size is \emph{N}, 
-each node maintains $m\frac{\alpha}{\sqrt{N}}$ objects on average, where $\alpha$ is a 
+If we assume that there exist \emph{k} unique objects in the network whose size is \emph{N}, 
+each node maintains $k\frac{\alpha}{\sqrt{N}}$ objects on average, where $\alpha$ is a 
 replication factor. In the stage of stabilization, the node is able to receive objects 
 from both neighbors. The maximum number of objects which need to be transferred is limited to 
 $O(\frac{1}{\sqrt{N}})$.
@@ -727,6 +742,7 @@ does not need to do anything because all objects have already been copied to
 all nodes in the same set of columns. Thus, neighbor nodes keep exactly
 the copies of the objects held by leaving or failing nodes.
 
+\iffalse
 \subsection{Estimating Network Size}
 Each node in a Deetoo network is distributed without any 
 server-client interaction, which makes it impossible for the peers to know exactly how many other peers 
@@ -801,6 +817,7 @@ because new node's address selection is based on caching address.}
 \label{fig:histogram}
 \end{figure*}
 \end{center}
+\fi
 
 \section{Analysis of Deetoo}\label{sec:analysis}
 Our analysis focuses on the probability of a query being successfully resolved
@@ -1003,15 +1020,13 @@ We used Netmodeler\footnote{Netmodeler is a free software/open source
 C++ library developed by the authors} for simulating the Deetoo algorithm.
 In our topology model on top of Netmodeler, 
 each bin may be occupied by at most one node and the nodes form two rings,
-one for the cache 
-and the other for query.
+one for the cache and the other for query.
 \iffalse
 % POB: anonymized version of the above
 We used a program we developed in C++ for simulating the Deetoo algorithm.
 In our topology model, 
 each bin may be occupied by at most one node and the nodes form two rings,
-one for the cache 
-and the other for query.
+one for the cache and the other for query.
 \fi
 %
 Then, each node is connected to a long-range neighbor according
@@ -1019,6 +1034,11 @@ to the \emph{inverse $r^{th}$-power distribution} for the small-world network mo
 For simplicity, the size of the query range is assumed to be the same as the size of the cache 
 range. All caching and querying processes are initiated on randomly selected nodes and
 messages are broadcasted within randomly chosen ranges.
+Network size determines the range of bounded broadcasting for both caching and querying, and
+success probabilities and communication costs depend on the accuracy of estimation.
+In simulation, the number of nodes in the whole network is estimated by calculating node density
+as described in \cite{LuoQHC08}. 
+%The analysis of trade-off between accuracy and cost will be analyzed as future work.
 
 \subsection{Performance Evaluation} 
 \begin{figure}
@@ -1097,6 +1117,7 @@ more than $\log N$, less than $\log^2 N$.} \label{fig:time}
 %\caption{} \label{fig:cost_hit}
 %\end{figure}
 
+\iffalse
 \subsection{Numerical Analysis for Success Probability}
 As described in Section \ref{sec:suc_prob}, the success probability remains constant 
 regardless of the number of nodes in Deetoo network. However, 
@@ -1156,6 +1177,7 @@ knowledge of the network size. Even though there is some noise in the
 simulation results, we see that
 the simulation result matches the numerical evaluation fairly well. Mean square error between numerical evaluation and 
 simulation result is 3.93e-05.
+\fi
 
 \subsection{Robustness}
 Due to the nature of P2P networks, each peer can leave or fail 
@@ -1174,7 +1196,9 @@ A node's rejoin time and leave time is exponentially distributed with same mean.
 %
 The consequence of this distribution makes the average number of 
 alive nodes in the system remains half of total number of the nodes 
-originally joined. As seen in the Figure \ref{fig:markov}, a node's state transits 
+originally joined. 
+%As seen in the Figure \ref{fig:markov}, a 
+A node's state transits 
 between \emph{ON} and \emph{OFF} with probability of 0.5. In other words, 
 the probability that each node is active at time t is $\frac{1}{2}$.
 In our simulation setting, every node stays to be turned \emph{ON} until 
@@ -1182,13 +1206,13 @@ network size reaches a given number.
 %%confusing
 It takes time a network size is saturated at the half of initial network size on average. 
 %reason
-\begin{figure}
-\centering
-\includegraphics[width=2.5in]{queueingmodel}
-\caption{State Transition Diagram for each node. Because join time and leave time 
-distribution has same average, the probability that each node is alive 
-at a time t is 0.5.} \label{fig:markov}
-\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[width=2.5in]{queueingmodel}
+%\caption{State Transition Diagram for each node. Because join time and leave time 
+%distribution has same average, the probability that each node is alive 
+%at a time t is 0.5.} \label{fig:markov}
+%\end{figure}
 After all nodes joined network, 100 data objects were inserted.
 Queries were executed 100 times per data object. 
 Both the cache events and the query events occur 
