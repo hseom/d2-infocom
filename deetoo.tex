@@ -121,10 +121,10 @@ software.\\
 %The probability of each address bin's occupancy is uniform. 
 Since replica objects are spread by bounded broadcasting within 
 a randomly selected range, Deetoo achieves uniformly distributed 
-load over entire network. 
-Because our algorithm distributes objects 
-evenly over the network, we avoid creating \emph{hotspots} and improve 
-the probability of finding rare objects.\\
+load over entire network. \\
+%Because our algorithm distributes objects 
+%evenly over the network, we avoid creating \emph{hotspots} and improve 
+%the probability of finding rare objects.\\
 {\bf Efficient data update/deletion:} In unstructured search systems, 
 data items are replicated by broadcasting and once an item is broadcasted, 
 there is no easy way to trace the location of replicated data. 
@@ -358,7 +358,7 @@ within a limited range on the caching ring to replicate the object
 (Figure \ref{fig:cache2}). 
 Bounded broadcasting size for caching ($C$) is given by
 $C=\sqrt{\alpha \frac{B}{N}}$, where $\alpha$ is a constant 
-\textit{replication factor} (details about this formulation is followed in Section
+\textit{replication factor} (this is derived in Section
 \ref{sec:analysis}). All nodes in the range of bounded broadcasting 
 eventually receive a copy of an object, $o$ (Figure \ref{fig:cache3}).
 
@@ -634,8 +634,8 @@ $P_{miss}/(1-\alpha)\rightarrow 1$ as $\alpha\rightarrow 0$.
 If $AN$ goes to zero as $N$ gets large, $P_{miss}\rightarrow 1$,
 and this result can be extended to any system with independent queries and
 caching and where each node is equally likely to be used for each query or
-cache, hence Deetoo is optimal in terms of the asymptotics of query/cache cost
-tradeoff.
+cache, hence Deetoo is optimal in terms of the asymptotic of query/cache cost
+trade-off.
 The derivation of these results is omitted due to
 lack of space.
 When $E$ is large, as is the case for large networks with large address
@@ -678,7 +678,7 @@ pr:Symphony}, while search time of
 Deetoo measures the average maximum depth of the local trees.
 \begin{figure}
 \centering
-\includegraphics[width=3 in]{searchtime}
+\includegraphics[width=2.5 in]{searchtime}
 \caption{The probability that a node \textit{a} has a connection to a node \textit{r} 
 in the middle(region \textit{mL}) is defined as $p_{m}$, and $p_m$ is inverse 
 proportional to the distance between \textit{a} and \textit{r}.} \label{fig:search}
@@ -1183,11 +1183,16 @@ similar results to compensate for typos in queries.
 
 %flooding
 Unlike DHTs, unstructured P2P systems mostly depend on flooding and random-walking 
-for message transfers. The big advantage of such unstructured P2P systems 
+for message transfers. The big advantage of unstructured P2P systems 
 is the capability of high-dimensional search.
 %The early version of Gnutella was based on naive flooding. 
 Because flooding produces a very large number of
 messages over an entire network, pure flooding limits network size. 
+To make unstructured systems scalable, systems such as Gnutella and
+Kazaa use supernodes to handle caching and routing query messages.
+This work compliments this approach as our algorithm can be employed
+by the supernodes to enable a trade-off on query and cache cost that
+is not available in existing supernode approaches.
 %To address this scaling problem, various types of solutions have been 
 %proposed. 
 %KaZaa\cite{kazaa} and iXChange
@@ -1216,9 +1221,8 @@ for queries at a certain point, searching unpopular objects requires
 the entire network to be visited; in addition, \textit{LightFlood} needs to 
 be warmed up.  
 A random walk based search technique is introduced by Adamic et. al. 
-in \cite{alph:powerlaw01}. 
-Their work reduces search cost by the factor of the number of replicas, 
-but they do not consider replica placement. 
+in \cite{alph:powerlaw01} to reduce search cost by the factor of 
+the number of replicas, but they do not consider replica placement. 
 Although random walk search has an advantage over flooding
 in terms of search cost, it has some
 scalability problems because almost all the queries tend to concentrate
@@ -1227,9 +1231,10 @@ replication with square-root principle\cite{CohenS02,LCKS02}
 and topology reconstruction\cite{Cooper05} have been proposed. 
 Both reduce search time but incur considerable communication cost 
 to maintain fresh topologies or data replication copies. 
-Popularity-biased random walk\cite{zs:popularity06}
-achieves square-root principle without the cost of data movement or
-topology reconstruction. Sarshar et al. \cite{ns:percolation}
+%Popularity-biased random walk\cite{zs:popularity06}
+%achieves square-root principle without the cost of data movement or
+%topology reconstruction. 
+Sarshar et al. \cite{ns:percolation}
 combined flooding and random walking in power-law networks. In their
 work, a query can be resolved in time $O(\log N)$. However
 $O(N\times \frac{2log k_{max}}{k_{max}})$ messages are
